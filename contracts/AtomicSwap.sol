@@ -62,7 +62,7 @@ contract AtomicSwapIERC20 {
 
         //require(swapStates[_swapID] == States.INVALID);//проверка на то что свап ИД уникальный
         // Transfer value from the IERC20 trader to this contract.
-        IERC20 IERC20AliceInstance = IERC20(_IERC20AliceContract); //IERC20AliceContract - некий инстанс который появляется с помощью _IERC20AliceContract
+        IERC20 IERC20AliceInstance = IERC20(_IERC20AliceContract); //IERC20AliceContract - инстанс
         require(IERC20AliceInstance.transferFrom(msg.sender, address(this), _IERC20AliceValue), "AS: ERC20 transferFrom error");// изымаются деньги у алисы на счет атомикс свопа
         
         IERC20 IERC20BobInstance = IERC20(_IERC20BobContract);
@@ -97,7 +97,7 @@ contract AtomicSwapIERC20 {
         swapStates[_swapID] = States.CLOSED;
 
         // Transfer the IERC20 funds from this contract to the withdrawing trader.
-        IERC20 IERC20AliceInstance = IERC20(swap.IERC20AliceContract); //IERC20AliceContract - некий инстанс который появляется с помощью _IERC20AliceContract
+        IERC20 IERC20AliceInstance = IERC20(swap.IERC20AliceContract); //IERC20AliceContract - инстанс
         require(IERC20AliceInstance.transfer(swap.Bob,swap.IERC20AliceValue));
         
         IERC20 IERC20BobInstance = IERC20(swap.IERC20BobContract);
